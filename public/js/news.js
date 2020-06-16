@@ -13,10 +13,8 @@ function load_home() {
     fetch('https://newsapi.org/v2/top-headlines?country=au&apiKey=2494c1e0d447493b83b2df3063774d82')
         .then(response => response.json())
         .then((news) => {
-            console.log("Received");
             for (var articleIndex in news.articles) {
                 var article = news.articles[articleIndex];
-                console.log(article);
                 appendArticle(article);
             }
         })
