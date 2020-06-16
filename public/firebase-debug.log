@@ -1,0 +1,16 @@
+[debug] [2020-06-16T08:55:20.592Z] ----------------------------------------------------------------------
+[debug] [2020-06-16T08:55:20.595Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2020-06-16T08:55:20.595Z] CLI Version:   7.12.1
+[debug] [2020-06-16T08:55:20.595Z] Platform:      darwin
+[debug] [2020-06-16T08:55:20.595Z] Node Version:  v12.8.0
+[debug] [2020-06-16T08:55:20.596Z] Time:          Tue Jun 16 2020 18:55:20 GMT+1000 (Australian Eastern Standard Time)
+[debug] [2020-06-16T08:55:20.596Z] ----------------------------------------------------------------------
+[debug] [2020-06-16T08:55:20.596Z] 
+[debug] [2020-06-16T08:55:20.615Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-06-16T08:55:20.616Z] > authorizing via signed-in user
+[debug] [2020-06-16T08:55:20.616Z] [iam] checking project news-portal-737 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-06-16T08:55:20.618Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/news-portal-737:testIamPermissions  
+
+[debug] [2020-06-16T08:55:21.259Z] <<< HTTP RESPONSE 200
+[debug] [2020-06-16T08:55:21.263Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/news-portal-737  
+ 
