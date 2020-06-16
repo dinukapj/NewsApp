@@ -4,28 +4,26 @@ var apiKey = "2494c1e0d447493b83b2df3063774d82";
 
 function load_home() {
     const proxyUrl = "https://cors-anywhere.herokuapp.com/"
-    const qInTitle = "";
-    const from = "";
-    const apiKey = "2494c1e0d447493b83b2df3063774d82";
-    const url = `${proxyUrl}https://newsapi.org/v2/top-headlines?country=au&apiKey=2494c1e0d447493b83b2df3063774d82`;
-    const request = new Request(url);
+    const RSS_URL = `${proxyUrl}https://www.9news.com.au/rss`;
 
-    fetch('https://newsapi.org/v2/top-headlines?country=au&apiKey=2494c1e0d447493b83b2df3063774d82')
-        .then(response => response.json())
-        .then((news) => {
-            for (var articleIndex in news.articles) {
-                var article = news.articles[articleIndex];
-                appendArticle(article);
-            }
-        })
-        .catch(error => {
-            console.log(error);
+    $.get(RSS_URL, function (data) {
+
+        console.log(data);
+
+        $(data).find("channel").each(function () { // or "item" or whatever suits your feed
+            var el = $(this);
+
+            $(data).find("item").each(function () {
+                var item = $(this);
+                appendArticle(item.find("title").text(), item.find("description").text().replace(/<\/?[^>]+(>|$)/g, ""), item.find("link").text(), item.find('media\\:content').attr('url'));
+            });
         });
+    });
 }
 
 var article_holder = document.getElementById("article_holder");
 
-function appendArticle(article) {
+function appendArticle(title_text, description_text, link_text, image_url) {
     var container = document.createElement("div");
     container.classList.add("company_listing");
     container.classList.add("isotope-item");
@@ -45,23 +43,23 @@ function appendArticle(article) {
     var image_link = document.createElement("a");
 
     var image = document.createElement("img");
-    image.src = article.urlToImage;
+    image.src = image_url;
     image.classList.add("article_image");
 
     image_link.appendChild(image);
     image_container.appendChild(image_link);
 
     var title_link = document.createElement("a");
-    title_link.href = article.url;
+    title_link.href = link_text;
     title_link.target = "_blank";
 
     var title = document.createElement("h3");
-    title.innerText = article.title;
+    title.innerText = title_text;
 
     title_link.appendChild(title);
 
     var description = document.createElement("p");
-    description.innerText = article.description;
+    description.innerText = description_text;
 
     info_box.appendChild(image_container);
     info_box.appendChild(title_link);
@@ -80,7 +78,7 @@ function appendArticle(article) {
     read_more_link.classList.add("btn_1");
     read_more_link.classList.add("small");
     read_more_link.innerText = "Read more";
-    read_more_link.href = article.url;
+    read_more_link.href = link_text;
     read_more_link.target = "_blank";
 
     right_container.appendChild(read_more_link);
